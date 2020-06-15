@@ -8,6 +8,7 @@
 
 #include "core_static_variable_definations.h"
 #include "core/uisettings.h"
+#include "core/core_api_functions.h"
 
 
 #define thisApp()  static_cast< ::core::qt::quwi::Application* >( ::QCoreApplication::instance() )
@@ -23,6 +24,7 @@ public:
     ~Application() override;
 private:
     UISettings m_settingsClass;
+    CoreApiFunctions m_apifunctions;
 
 public slots:
     /*LOGIN FUNCTIONS*/
