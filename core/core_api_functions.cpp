@@ -6,18 +6,15 @@ CoreApiFunctions::CoreApiFunctions(QObject *parent) : QObject(parent)
     connect(manager, SIGNAL(finished(QNetworkReply *)), this, SLOT(onFinished(QNetworkReply *)));
 }
 
-void CoreApiFunctions::setNetworkManagerCommand(QNetworkRequest request, QUrlQuery params)
+void CoreApiFunctions::setNetworkManagerCommand(QNetworkRequest request, QByteArray postData)
 {
   if(manager != 0){
-      qDebug()<<params.query().toUtf8();
-     QString json =  "{\"email\": \"vitaliibondtest@gmail.com\",\"password\": \"vitaliibondtest\"}";
-      manager->post(request,json.toUtf8());
+      manager->post(request,postData);
   }
 }
 
 void CoreApiFunctions::onFinished(QNetworkReply *reply)
 {
-    qDebug()<<"RESULTAT KELDI"<<reply->url().toString();
      QString strReply = (QString)reply->readAll();
      qDebug()<<strReply;
 

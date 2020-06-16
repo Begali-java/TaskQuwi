@@ -19,16 +19,17 @@ void Application::loginGuiThreadOnly(QString login, QString password)
 {
     if(login.trimmed().length() >0 && password.trimmed().length() && password.trimmed().length() >0){
         /*CHECK LOGIN FROM API*/
-        QNetworkRequest request(QUrl("https://api.quwi.com/v2/auth/login"));
+        QNetworkRequest request(QUrl(statics_definations::core::BASE_URL+"auth/login"));
         request.setRawHeader("Content-Type", "application/json");
         request.setRawHeader("Client-Timezone-Offset", "60");
         request.setRawHeader("Client-Language", "ru-RU");
         request.setRawHeader("Client-Company", "udimi");
         request.setRawHeader("Client-Device", "desktop");
-        QUrlQuery params;
-        params.addQueryItem("email", "vitaliibondtest@gmail.com");
-        params.addQueryItem("password", "vitaliibondtest");
-        m_apifunctions.setNetworkManagerCommand(request,params);
+        QJsonObject obj;
+        obj["email"] = "vitaliibondtest@gmail.com";
+        obj["password"] = "vitaliibondtest";
+
+       m_apifunctions.setNetworkManagerCommand(request,QJsonDocument(obj).toJson());
 
 
         emit loginSuccessSignal();

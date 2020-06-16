@@ -12,6 +12,7 @@
 #include <QNetworkReply>
 #include <QUrlQuery>
 #include <QUrl>
+#include <QByteArray>
 #include <QDebug>
 
 class CoreApiFunctions : public QObject
@@ -22,7 +23,7 @@ public:
 private:
     QNetworkAccessManager * manager = 0;
 public slots:
-    void setNetworkManagerCommand(QNetworkRequest request,QUrlQuery params);
+    void setNetworkManagerCommand(QNetworkRequest request,QByteArray postData);
     void onFinished(QNetworkReply *reply);
 
 signals:
