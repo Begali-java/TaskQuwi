@@ -7,7 +7,7 @@ Application::Application(int& a_argc, char** a_argv)
       ::QApplication (a_argc,a_argv)
 {
 
-
+  connect(&m_apifunctions,SIGNAL(setErrorStatusWithMsgStr(bool, QString)),this,SLOT(setLoginStatus(bool,QString)));
 }
 
 Application::~Application()

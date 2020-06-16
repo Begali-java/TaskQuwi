@@ -12,7 +12,6 @@
 
 
 #define thisApp()  static_cast< ::core::qt::quwi::Application* >( ::QCoreApplication::instance() )
-
 namespace core { namespace qt { namespace quwi {
 class Application final : public ::QApplication
 {

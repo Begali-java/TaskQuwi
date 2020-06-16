@@ -7,6 +7,8 @@ ContainerWindow::ContainerWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle(tr("Quwi Test App"));
+    connect(thisApp(),SIGNAL(loginSuccessSignal()),this,SLOT(setProjectWindow()));
+
 }
 
 ContainerWindow::~ContainerWindow()

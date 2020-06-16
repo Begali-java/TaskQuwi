@@ -21,6 +21,7 @@ class ContainerWindow : public QWidget
 public:
     ContainerWindow(QWidget *parent = nullptr);
     ~ContainerWindow();
+public slots:
     /*INIT ALL SETTINGS*/
     void initAllSettings();
     /*LOGIN WINDOW*/
