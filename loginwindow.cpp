@@ -24,9 +24,20 @@ void LoginWindow::initAllSettings(){
 
 }
 
+void LoginWindow::setLastSuccesEmail()
+{
+    QSettings m_settings("config.ini",QSettings::IniFormat);
+    m_settings.beginGroup("SETTINGS");
+    m_settings.setValue("email",ui->emailLineEdit->text().trimmed());
+    m_settings.endGroup();
+    ui->passwordLineEdit->setText("");
+}
+
 void LoginWindow::on_loginPushbutton_clicked()
 {
      if(ui->emailLineEdit->text().trimmed().length() > 0  && ui->passwordLineEdit->text().trimmed().length() > 0){
          thisApp()->loginGuiThreadOnly(ui->emailLineEdit->text().trimmed(),ui->passwordLineEdit->text());
+     }else{
+         thisApp()->setLoginStatus(false,tr("Empity login or password"));
      }
 }

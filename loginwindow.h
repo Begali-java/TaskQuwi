@@ -2,6 +2,9 @@
 #define LOGINWINDOW_H
 
 #include <QWidget>
+#include <QString>
+#include <QSettings>
+
 
 /*CORE FUNCTIONS*/
 #include "core/core_api_application.h"
@@ -19,6 +22,7 @@ public:
     ~LoginWindow();
 public slots:
     void initAllSettings();
+    void setLastSuccesEmail();
 private slots:
     void on_loginPushbutton_clicked();
 
