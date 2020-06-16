@@ -26,13 +26,11 @@ void Application::loginGuiThreadOnly(QString login, QString password)
         request.setRawHeader("Client-Company", "udimi");
         request.setRawHeader("Client-Device", "desktop");
         QJsonObject obj;
-        obj["email"] = "vitaliibondtest@gmail.com";
-        obj["password"] = "vitaliibondtest";
+        obj["email"] = login;
+        obj["password"] = password;
 
-       m_apifunctions.setNetworkManagerCommand(request,QJsonDocument(obj).toJson());
+        m_apifunctions.setNetworkManagerCommand(request,QJsonDocument(obj).toJson());
 
-
-        emit loginSuccessSignal();
     }else{
         emit loginErorSignal(statics_definations::core::ERROR_LOGIN_LOGIN_AND_PASSWORD_NOT_BE_EMPITY,tr("Empity login or password"));
     }
@@ -42,6 +40,15 @@ void Application::loginGuiThreadOnly(QString login, QString password)
 QString Application::getLastEmail()
 {
     return m_settingsClass.getLastEmail();
+}
+
+void Application::setLoginStatus(bool m_status, QString msgStr)
+{
+    if(m_status){
+        emit loginSuccessSignal();
+    }else{
+        emit loginErorSignal(statics_definations::core::LOGIN_ERROR_WITH_AUTH,msgStr);
+    }
 }
 
 void Application::showMessageGuiThreadOnly(int msgStatus, QString msgStr)

@@ -13,7 +13,11 @@
 #include <QUrlQuery>
 #include <QUrl>
 #include <QByteArray>
+#include <QSettings>
 #include <QDebug>
+
+/*CORE STATIC VARIABLES*/
+#include "core/core_static_variable_definations.h"
 
 class CoreApiFunctions : public QObject
 {
@@ -25,6 +29,8 @@ private:
 public slots:
     void setNetworkManagerCommand(QNetworkRequest request,QByteArray postData);
     void onFinished(QNetworkReply *reply);
+    void parseRequest(QString url,QString jsonStr);
+    QJsonObject getJsonObjectFromString(QString jsonStr);
 
 signals:
 

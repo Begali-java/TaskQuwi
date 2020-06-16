@@ -15,8 +15,6 @@ public:
 public:
     QString getLastEmail();
     QString getToken();
-private:
-    QSettings m_settings;
 signals:
 
 };
