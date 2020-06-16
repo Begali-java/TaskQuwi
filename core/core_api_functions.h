@@ -33,7 +33,7 @@ public slots:
     QJsonObject getJsonObjectFromString(QString jsonStr);
 
 signals:
-        void setErrorStatusWithMsgStr(bool,QString msgStr);
+    void setErrorStatusWithMsgStr(bool,QString msgStr);
 
 };
 
