@@ -12,3 +12,13 @@ ProjectListWindow::~ProjectListWindow()
 {
     delete ui;
 }
+
+void ProjectListWindow::on_projectsBtn_clicked()
+{
+
+}
+
+void ProjectListWindow::on_logoutButton_clicked()
+{
+
+}
