@@ -18,6 +18,11 @@ void CoreApiFunctions::setNetworkManagerCommand(QNetworkRequest request, QByteAr
     }
 }
 
+void CoreApiFunctions::setNetworkManagerCommandGet(QNetworkRequest request)
+{
+
+}
+
 void CoreApiFunctions::onFinished(QNetworkReply *reply)
 {
     QString strReply = (QString)reply->readAll();
