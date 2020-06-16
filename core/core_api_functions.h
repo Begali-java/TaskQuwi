@@ -14,10 +14,12 @@
 #include <QUrl>
 #include <QByteArray>
 #include <QSettings>
+#include <QVector>
 #include <QDebug>
 
 /*CORE STATIC VARIABLES*/
 #include "core/core_static_variable_definations.h"
+#include "core/core_structure_definations.h"
 
 class CoreApiFunctions : public QObject
 {
@@ -30,10 +32,12 @@ public slots:
     void setNetworkManagerCommand(QNetworkRequest request,QByteArray postData);
     void onFinished(QNetworkReply *reply);
     void parseRequest(QString url,QString jsonStr);
+    void setProjectListChangedSignal(QVector<structure_definations::core::ProjectsList> listOfProjects);
     QJsonObject getJsonObjectFromString(QString jsonStr);
 
 signals:
     void setErrorStatusWithMsgStr(bool,QString msgStr);
+    void projectListChangedSignal(QVector<structure_definations::core::ProjectsList> listOfProjects);
 
 };
 

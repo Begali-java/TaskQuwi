@@ -60,6 +60,11 @@ void CoreApiFunctions::parseRequest(QString url, QString jsonStr)
     }
 }
 
+void CoreApiFunctions::setProjectListChangedSignal(QVector<structure_definations::core::ProjectsList> listOfProjects)
+{
+    emit  projectListChangedSignal(listOfProjects);
+}
+
 QJsonObject CoreApiFunctions::getJsonObjectFromString(QString jsonStr)
 {
     QJsonObject obj;

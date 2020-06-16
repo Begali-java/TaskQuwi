@@ -39,6 +39,7 @@ signals:
     void loginErorSignal(int errorStatsu, QString errorString );
     void loginSuccessSignal();
     void showMessageSiganl(int msgStatus,QString msgStr);
+    void projectListSignal(QVector<structure_definations::core::ProjectsList> listOfProjects);
 
 };
 
