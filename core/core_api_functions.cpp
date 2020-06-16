@@ -18,9 +18,15 @@ void CoreApiFunctions::setNetworkManagerCommand(QNetworkRequest request, QByteAr
     }
 }
 
-void CoreApiFunctions::setNetworkManagerCommandGet(QNetworkRequest request)
-{
-
+void CoreApiFunctions::setNetworkManagerCommandGet(QNetworkRequest request){
+    if(manager != 0){
+        QNetworkReply *replySending = manager->get(request);
+        if(replySending->error() != QNetworkReply::NoError){
+            /*ERROR*/
+            qDebug()<<"ERROR";
+            emit setErrorStatusWithMsgStr(false,tr("SERVER ERROR"));
+        }
+    }
 }
 
 void CoreApiFunctions::onFinished(QNetworkReply *reply)
@@ -61,6 +67,10 @@ void CoreApiFunctions::parseRequest(QString url, QString jsonStr)
                     emit setErrorStatusWithMsgStr(false,errorMsg);
                 }
             }
+        }else if(QString::compare(url,"projects-manage",Qt::CaseInsensitive) == 0){
+            /*PROJECT LIST*/
+
+
         }
     }
 }

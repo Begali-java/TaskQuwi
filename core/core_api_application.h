@@ -30,6 +30,8 @@ public slots:
     void loginGuiThreadOnly(QString login, QString password);
     QString getLastEmail();
     void setLoginStatus(bool m_status,QString msgStr);
+    /*PROJECT LIST*/
+    void getProjectList();
 
     /*GLOBAL FUNCTIONS*/
     void showMessageGuiThreadOnly(int msgStatus,QString msgStr);
@@ -42,7 +44,6 @@ signals:
     void projectListSignal(QVector<structure_definations::core::ProjectsList> listOfProjects);
 
 };
-
 
 }}}
 

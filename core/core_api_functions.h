@@ -30,6 +30,7 @@ private:
     QNetworkAccessManager * manager = 0;
 public slots:
     void setNetworkManagerCommand(QNetworkRequest request,QByteArray postData);
+    void setNetworkManagerCommandGet(QNetworkRequest request);
     void onFinished(QNetworkReply *reply);
     void parseRequest(QString url,QString jsonStr);
     void setProjectListChangedSignal(QVector<structure_definations::core::ProjectsList> listOfProjects);

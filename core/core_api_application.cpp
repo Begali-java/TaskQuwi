@@ -36,7 +36,14 @@ void Application::loginGuiThreadOnly(QString login, QString password)
     }
 
 }
+void Application::getProjectList(){
+    QNetworkRequest request(QUrl(statics_definations::core::BASE_URL+"projects-manage"));
+    request.setRawHeader("Content-Type", "application/json");
+    QString tokenUrl = "Bearer "+getToken();
+    request.setRawHeader("Authorization", tokenUrl.toUtf8());
+    m_apifunctions.setNetworkManagerCommandGet(request);
 
+}
 QString Application::getLastEmail()
 {
     return m_settingsClass.getLastEmail();
