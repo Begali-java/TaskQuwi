@@ -8,21 +8,21 @@ CoreApiFunctions::CoreApiFunctions(QObject *parent) : QObject(parent)
 
 void CoreApiFunctions::setNetworkManagerCommand(QNetworkRequest request, QByteArray postData)
 {
-  if(manager != 0){
-      QNetworkReply *replySending = manager->post(request,postData);
-      if(replySending->error() != QNetworkReply::NoError){
-          /*ERROR*/
-          qDebug()<<"ERROR";
-          thisApp()->setLoginStatus(false,tr("SERVER ERROR"));
-      }
-  }
+    if(manager != 0){
+        QNetworkReply *replySending = manager->post(request,postData);
+        if(replySending->error() != QNetworkReply::NoError){
+            /*ERROR*/
+            qDebug()<<"ERROR";
+            emit setErrorStatusWithMsgStr(false,tr("SERVER ERROR"));
+        }
+    }
 }
 
 void CoreApiFunctions::onFinished(QNetworkReply *reply)
 {
-     QString strReply = (QString)reply->readAll();
-     parseRequest(reply->url().toString(),strReply);
-     Q_UNUSED(reply)
+    QString strReply = (QString)reply->readAll();
+    parseRequest(reply->url().toString(),strReply);
+    Q_UNUSED(reply)
 }
 
 void CoreApiFunctions::parseRequest(QString url, QString jsonStr)
@@ -40,10 +40,11 @@ void CoreApiFunctions::parseRequest(QString url, QString jsonStr)
                     m_settings.setValue("token",m_token);
                     m_settings.endGroup();
                     qDebug()<<"LOGIN SUCCESS";
+                    emit setErrorStatusWithMsgStr(true,tr("SUCCESS"));
                 }else if(jsonObj.contains("first_errors")){
                     QJsonObject subJsonObj = jsonObj["first_errors"].toObject();
                     if(subJsonObj.isEmpty()){
-                        thisApp()->setLoginStatus(false,tr("ERROR"));
+                        emit setErrorStatusWithMsgStr(false,tr("ERROR"));
                         return;
                     }
 
@@ -52,7 +53,7 @@ void CoreApiFunctions::parseRequest(QString url, QString jsonStr)
                     for(int i = 0; i < m_keys.length(); i++){
                         errorMsg.append(subJsonObj[m_keys.at(i)].toString());
                     }
-                    thisApp()->setLoginStatus(false,errorMsg);
+                    emit setErrorStatusWithMsgStr(false,errorMsg);
                 }
             }
         }
@@ -61,18 +62,18 @@ void CoreApiFunctions::parseRequest(QString url, QString jsonStr)
 
 QJsonObject CoreApiFunctions::getJsonObjectFromString(QString jsonStr)
 {
-        QJsonObject obj;
-        QJsonDocument doc = QJsonDocument::fromJson(jsonStr.toUtf8());
-        if(!doc.isNull()){
-            if(doc.isObject()){
-                obj = doc.object();
-            }
-            else{
-                qDebug() << "NOT OBJECT FOUND ERROR" << endl;
-            }
+    QJsonObject obj;
+    QJsonDocument doc = QJsonDocument::fromJson(jsonStr.toUtf8());
+    if(!doc.isNull()){
+        if(doc.isObject()){
+            obj = doc.object();
         }
         else{
-            qDebug() <<"INVALID JSON ERROR";
+            qDebug() << "NOT OBJECT FOUND ERROR" << endl;
         }
-        return obj;
+    }
+    else{
+        qDebug() <<"INVALID JSON ERROR";
+    }
+    return obj;
 }

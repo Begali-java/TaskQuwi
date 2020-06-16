@@ -18,7 +18,7 @@
 
 /*CORE STATIC VARIABLES*/
 #include "core/core_static_variable_definations.h"
-#include "core/core_api_application.h"
+//#include "core/core_api_application.h"
 
 class CoreApiFunctions : public QObject
 {
