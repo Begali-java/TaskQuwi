@@ -2,7 +2,9 @@
 #define CONTAINERWINDOW_H
 
 #include <QWidget>
-
+#include <QString>
+#include <QMessageBox>
+#include <QDebug>
 /*INCLUDE ALL WIDGETS*/
 #include "loginwindow.h"
 #include "projectlistwindow.h"
@@ -30,6 +32,8 @@ public slots:
     void setProjectWindow();
     /*PROJECT EDIT WINDOW*/
     void setProjectEditWindow();
+    /*GLOBAL FUNCTIONS*/
+    void setShowErrorMessage(int status,QString msgStr);
 
 private:
     Ui::ContainerWindow *ui;

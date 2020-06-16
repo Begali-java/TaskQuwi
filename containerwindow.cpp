@@ -8,6 +8,7 @@ ContainerWindow::ContainerWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle(tr("Quwi Test App"));
     connect(thisApp(),SIGNAL(loginSuccessSignal()),this,SLOT(setProjectWindow()));
+    connect(thisApp(),SIGNAL(loginErorSignal(int,QString)),this,SLOT(setShowErrorMessage(int,QString)));
 
 }
 
@@ -44,5 +45,12 @@ void ContainerWindow::setProjectWindow()
 void ContainerWindow::setProjectEditWindow()
 {
     ui->stackedWidget->setCurrentIndex(statics_definations::core::PROJECT_EDIT_WINDOW);
+}
+
+void ContainerWindow::setShowErrorMessage(int status, QString msgStr)
+{
+    Q_UNUSED(status)
+    QMessageBox msgBox;
+    msgBox.critical(this, tr("ERROR"), msgStr);
 }
 
