@@ -13,6 +13,7 @@ void CoreApiFunctions::setNetworkManagerCommand(QNetworkRequest request, QByteAr
       if(replySending->error() != QNetworkReply::NoError){
           /*ERROR*/
           qDebug()<<"ERROR";
+          thisApp()->setLoginStatus(false,tr("SERVER ERROR"));
       }
   }
 }
@@ -35,8 +36,23 @@ void CoreApiFunctions::parseRequest(QString url, QString jsonStr)
                 if(jsonObj.contains("token")){
                     QString m_token = jsonObj["token"].toString();
                     QSettings m_settings("config.ini",QSettings::IniFormat);
+                    m_settings.beginGroup("SETTINGS");
                     m_settings.setValue("token",m_token);
+                    m_settings.endGroup();
                     qDebug()<<"LOGIN SUCCESS";
+                }else if(jsonObj.contains("first_errors")){
+                    QJsonObject subJsonObj = jsonObj["first_errors"].toObject();
+                    if(subJsonObj.isEmpty()){
+                        thisApp()->setLoginStatus(false,tr("ERROR"));
+                        return;
+                    }
+
+                    QStringList m_keys =subJsonObj.keys();
+                    QString errorMsg = "";
+                    for(int i = 0; i < m_keys.length(); i++){
+                        errorMsg.append(subJsonObj[m_keys.at(i)].toString());
+                    }
+                    thisApp()->setLoginStatus(false,errorMsg);
                 }
             }
         }

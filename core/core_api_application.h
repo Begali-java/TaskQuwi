@@ -30,6 +30,7 @@ public slots:
     /*LOGIN FUNCTIONS*/
     void loginGuiThreadOnly(QString login, QString password);
     QString getLastEmail();
+    void setLoginStatus(bool m_status,QString msgStr);
 
     /*GLOBAL FUNCTIONS*/
     void showMessageGuiThreadOnly(int msgStatus,QString msgStr);
