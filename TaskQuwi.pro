@@ -21,18 +21,21 @@ SOURCES += \
     loginwindow.cpp \
     main.cpp \
     containerwindow.cpp \
+    projectcustomitem.cpp \
     projecteditwindow.cpp \
     projectlistwindow.cpp
 
 HEADERS += \
     containerwindow.h \
     loginwindow.h \
+    projectcustomitem.h \
     projecteditwindow.h \
     projectlistwindow.h
 
 FORMS += \
     containerwindow.ui \
     loginwindow.ui \
+    projectcustomitem.ui \
     projecteditwindow.ui \
     projectlistwindow.ui
 

@@ -40,6 +40,7 @@ void ContainerWindow::setLoginWindow()
 void ContainerWindow::setProjectWindow()
 {
     ui->stackedWidget->setCurrentIndex(statics_definations::core::PROJECT_LIST_WINDOW);
+    thisApp()->getProjectList();
     m_login->setLastSuccesEmail();
 }
 

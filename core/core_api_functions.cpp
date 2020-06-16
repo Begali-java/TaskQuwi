@@ -69,7 +69,31 @@ void CoreApiFunctions::parseRequest(QString url, QString jsonStr)
             }
         }else if(QString::compare(url,"projects-manage",Qt::CaseInsensitive) == 0){
             /*PROJECT LIST*/
+            QJsonObject objProject = getJsonObjectFromString(jsonStr);
+            if(objProject.contains("projects")){
+                QJsonArray projectsArray = objProject["projects"].toArray();
+                QVector<structure_definations::core::ProjectsList> listOfProjects;
 
+                for(int a = 0; a < projectsArray.size(); a++){
+
+                  QJsonObject valueofProject = projectsArray.at(a).toObject();
+
+                  /*ITEM*/
+                  structure_definations::core::ProjectsList projectItem;
+                  projectItem.id = valueofProject["id"].toDouble();
+                  projectItem.logoUrl = valueofProject["logo_url"].toString();
+                  projectItem.projectName = valueofProject["name"].toString();
+                  projectItem.activeStatus = valueofProject["is_active"].toInt();
+                  projectItem.spent_time_week = valueofProject["spent_time_week"].toDouble();
+                  projectItem.spent_time_month = valueofProject["spent_time_month"].toDouble();
+                  projectItem.spent_time_all = valueofProject["spent_time_all"].toDouble();
+                  listOfProjects.append(projectItem);
+
+                }
+
+                /*EMIT PROJECT CHANGED SIGNAL*/
+                emit projectListChangedSignal(listOfProjects);
+            }
 
         }
     }

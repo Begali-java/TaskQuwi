@@ -96,8 +96,20 @@
    <item>
     <widget class="QWidget" name="widget_2" native="true">
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(170, 255, 255);</string>
+      <string notr="true"/>
      </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QListWidget" name="listWidget">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>
